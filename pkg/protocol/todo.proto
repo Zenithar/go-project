@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package todo;
+option go_package = "todo";
+
+import "google/protobuf/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+// For tests
+option (gogoproto.testgen_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.populate_all) = true;
+
+// -----------------------------------------------------------------------------
+// Domain
+// -----------------------------------------------------------------------------
+
+message Error {
+    int32 code = 1;
+    string message = 2;
+}
+
+message Domain {
+
+    message Project {
+        string id = 1;
+        string label = 2;
+        string description = 3;
+        google.protobuf.Timestamp created_on = 4[
+            (gogoproto.stdtime) = true
+        ];
+    }
+
+    message Task { 
+        string project_id = 1;
+        string id = 2;
+        string label = 3;
+        string description = 4;
+        bool done = 5;
+        google.protobuf.Timestamp created_on = 6[
+            (gogoproto.stdtime) = true
+        ];
+        google.protobuf.Timestamp completed_on = 7[
+            (gogoproto.stdtime) = true
+        ];
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Requests
+// -----------------------------------------------------------------------------
+
+message CreateProjectReq {
+    string id = 1;
+    string label = 2;
+    string description = 3;
+}
+
+message GetProjectReq {
+    string id = 1;
+}
+
+message SingleProjectRes {
+    Error error = 1;
+    Domain.Project entity = 2;
+}

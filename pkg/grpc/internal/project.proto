@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package todo;
+option go_package = "go.zenithar.org/todo/pkg/grpc/internal/pb";
+
+import "todo.proto";
+
+// -----------------------------------------------------------------------------
+// Services
+// -----------------------------------------------------------------------------
+
+service Project {
+    rpc Create (todo.CreateProjectReq) returns (todo.SingleProjectRes);
+    rpc Get (todo.GetProjectReq) returns (todo.SingleProjectRes);
+    rpc Update (todo.CreateProjectReq) returns (todo.SingleProjectRes);
+    rpc Delete (todo.GetProjectReq) returns (todo.SingleProjectRes);
+}

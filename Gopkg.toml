@@ -1,0 +1,57 @@
+required = [
+  "github.com/gogo/protobuf/protoc-gen-gogo",
+  "github.com/mwitkow/go-proto-validators/protoc-gen-govalidators",
+  "github.com/golang/mock/mockgen",
+  "github.com/gogo/googleapis/google/api",
+  "github.com/gogo/googleapis/google/rpc",
+]
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/dchest/uniuri"
+
+[[constraint]]
+  name = "github.com/go-ozzo/ozzo-validation"
+  version = "3.3.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gogo/googleapis"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gogo/protobuf"
+
+[[constraint]]
+  name = "google.golang.org/grpc"
+  version = "1.11.2"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/mwitkow/go-proto-validators"
+
+[[constraint]]
+  name = "github.com/opentracing/opentracing-go"
+  version = "^1.0.2"
+
+[[constraint]]
+  name = "github.com/uber/jaeger-client-go"
+  version = "^2.12.0"
+
+[prune]
+  go-tests = true
+  unused-packages = true
+  non-go = true
+
+  [[prune.project]]
+    name = "github.com/gogo/protobuf"
+    non-go = false
+    unused-packages = false
+
+  [[prune.project]]
+    name = "github.com/gogo/googleapis"
+    non-go = false
+
+  [[prune.project]]
+    name = "github.com/mwitkow/go-proto-validators"
+    non-go = false
